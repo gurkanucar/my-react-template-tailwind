@@ -1,9 +1,11 @@
 import { useRef, useState, useEffect } from 'react';
-import { useApplicationConfigStore } from '@/store/applicationConfigStore';
 import { ChevronDown } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+
+import { useApplicationConfigStore } from '@/store/applicationConfigStore';
 import trFlag from '@/assets/flags/tr.svg';
 import enFlag from '@/assets/flags/en.svg';
-import { useTranslation } from 'react-i18next';
+
 
 interface Localization {
   locale: string;

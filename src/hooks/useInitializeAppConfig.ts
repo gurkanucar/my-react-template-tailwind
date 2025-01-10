@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+
 import { useApplicationConfigStore } from '@/store/applicationConfigStore';
 
 export const useInitializeAppConfig = () => {

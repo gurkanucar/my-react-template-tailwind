@@ -1,8 +1,9 @@
 import { Github, Twitter, Mail } from "lucide-react";
-
 import { useTranslation } from "react-i18next";
+
 import { useInitializeAppConfig } from "./hooks/useInitializeAppConfig";
 import LanguageSelector from "./components/LanguageSelector";
+
 
 const WelcomePage = () => {
   useInitializeAppConfig();
