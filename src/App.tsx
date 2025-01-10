@@ -13,7 +13,7 @@ const WelcomePage = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground py-12 px-4">
-      <div className="flex gap-2">
+    <div className="flex justify-end gap-4 mb-6">
         <LanguageSelector />
         <ThemeSelector />
       </div>
