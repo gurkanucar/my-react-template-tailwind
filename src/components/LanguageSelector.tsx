@@ -1,70 +1,102 @@
-import React from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useApplicationConfigStore } from '@/store/applicationConfigStore';
+import { ChevronDown } from 'lucide-react';
+import trFlag from '@/assets/flags/tr.svg';
+import enFlag from '@/assets/flags/en.svg';
+import { useTranslation } from 'react-i18next';
 
-const localizations = [
+interface Localization {
+  locale: string;
+  flag: string;
+}
+
+const localizations: Localization[] = [
   {
     locale: 'tr',
-    flag: '/assets/flags/tr.svg',
+    flag: trFlag,
   },
   {
     locale: 'en',
-    flag: '/assets/flags/en.svg',
+    flag: enFlag,
   },
 ];
 
 const LanguageSelector = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const { language, toggleLanguage } = useApplicationConfigStore();
+  const { t } = useTranslation();
+
   const currentLocalization = localizations.find(
     (localization) => localization.locale === language,
   );
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleLanguageChange = (locale: string) => {
+    toggleLanguage(locale);
+    setIsOpen(false);
+  };
+
   return (
-    <div className="relative">
-      {/* Current Language Display */}
-      <button className="flex items-center px-4 py-2 bg-white border border-gray-300 rounded-lg shadow-md hover:bg-gray-100 transition">
+    <div className="relative" ref={dropdownRef}>
+      <button
+        className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+        aria-haspopup="true"
+        aria-label="Select language"
+      >
         <img
           src={currentLocalization?.flag}
-          alt={currentLocalization?.locale}
-          className="w-6 h-6 rounded-full mr-2"
+          alt={`${currentLocalization?.locale} flag`}
+          className="h-3 w-5 object-cover"
         />
-        <span className="text-gray-700 font-medium capitalize">
-          {currentLocalization?.locale}
+        <span className="capitalize">
+          {t(currentLocalization?.locale || '')}
         </span>
-        <svg
-          className="w-4 h-4 ml-2 text-gray-500"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-        >
-          <path
-            fillRule="evenodd"
-            d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4 4a.75.75 0 01-1.06 0l-4-4a.75.75 0 01.02-1.06z"
-            clipRule="evenodd"
-          />
-        </svg>
+        <ChevronDown
+          className={`h-4 w-4 transition-transform duration-200 ${
+            isOpen ? 'rotate-180' : ''
+          }`}
+        />
       </button>
 
-      {/* Dropdown Menu */}
-      <div className="absolute mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg">
-        {localizations.map((localization) => (
-          <button
-            key={localization.locale}
-            className={`flex items-center w-full px-4 py-2 hover:bg-gray-100 transition ${
-              localization.locale === language ? 'bg-gray-100' : ''
-            }`}
-            onClick={() => toggleLanguage(localization.locale)}
-          >
-            <img
-              src={localization.flag}
-              alt={localization.locale}
-              className="w-6 h-6 rounded-full mr-2"
-            />
-            <span className="text-gray-700 font-medium capitalize">
-              {localization.locale}
-            </span>
-          </button>
-        ))}
-      </div>
+      {isOpen && (
+        <div className="absolute left-0 mt-2 min-w-[120px] origin-top-left rounded-lg border border-gray-200 bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition-all dark:border-gray-700 dark:bg-gray-800">
+          {localizations.map((localization) => (
+            <button
+              key={localization.locale}
+              onClick={() => handleLanguageChange(localization.locale)}
+              className={`flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 ${
+                localization.locale === language
+                  ? 'bg-gray-50 dark:bg-gray-700'
+                  : ''
+              }`}
+              aria-current={localization.locale === language ? 'true' : 'false'}
+            >
+              <img
+                src={localization.flag}
+                alt={`${localization.locale} flag`}
+                className="h-3 w-5 object-cover"
+              />
+              <span className="capitalize">{t(localization.locale)}</span>
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
