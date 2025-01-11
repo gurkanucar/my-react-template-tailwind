@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { useApplicationConfigStore } from '@/store/applicationConfigStore';
+
 import LanguageSelector from './LanguageSelector';
 import ThemeSelector from './ThemeSelector';
 
