@@ -50,5 +50,11 @@
   "contact": "Contact",
   "welcome_to_app": "Welcome to Our App",
   "page_not_found": "Page not found",
-  "back_to_home": "Back to Home"
+  "back_to_home": "Back to Home",
+  "users": "Users",
+  "addresses": "Addresses",
+  "configs": "Configurations",
+  "list_users": "List Users",
+  "create_user": "Create User",
+  "edit_user": "Edit User"
 }

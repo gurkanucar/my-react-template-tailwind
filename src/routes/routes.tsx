@@ -4,6 +4,7 @@ import PrivateLayout from '@/layouts/PrivateLayout';
 import EmptyLayout from '@/layouts/EmptyLayout';
 import NotFound from '@/pages/NotFound';
 import FadeTransition from '@/components/FadeTransition';
+import DashboardLayout from '@/layouts/DashboardLayout';
 
 import * as Pages from './lazyComponents';
 
@@ -21,12 +22,21 @@ const publicRoutes = [
 
 const privateRoutes = [
   { path: '/home', element: <Pages.Home /> },
-  { path: '/dashboard', element: <Pages.Dashboard /> },
   { path: '/profile', element: <Pages.Profile /> },
 ].map((route) => ({ ...route, element: withFade(route.element) }));
 
 const emptyRoutes = [
   { path: '/empty', element: <Pages.EmptyPage /> },
+].map((route) => ({ ...route, element: withFade(route.element) }));
+
+const dashboardRoutes = [
+  { path: '/dashboard', element: <Pages.Dashboard /> },
+  { path: '/dashboard/users', element: <Pages.Users /> },
+  { path: '/dashboard/users/list', element: <Pages.UsersList /> },
+  { path: '/dashboard/users/create', element: <Pages.CreateUser /> },
+  { path: '/dashboard/users/:id/edit', element: <Pages.EditUser /> },
+  { path: '/dashboard/addresses', element: <Pages.Addresses /> },
+  { path: '/dashboard/configs', element: <Pages.Configs /> },
 ].map((route) => ({ ...route, element: withFade(route.element) }));
 
 export const routes = [
@@ -36,13 +46,16 @@ export const routes = [
   },
   {
     element: <PrivateLayout />,
-    children: privateRoutes,
+    children: privateRoutes.filter(route => route.path !== '/dashboard'),
+  },
+  {
+    element: <DashboardLayout />,
+    children: dashboardRoutes,
   },
   {
     element: <EmptyLayout />,
     children: emptyRoutes,
   },
-  // 404 or catch-all route
   {
     path: '*',
     element: withFade(<NotFound />),
