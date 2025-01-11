@@ -42,7 +42,7 @@ const DashboardHeader = () => {
       <div className="px-4 h-16 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
-          <Link to="/dashboard" className="flex items-center">
+          <Link to="/panel/dashboard" className="flex items-center">
             <span className="text-xl font-bold text-foreground">Admin Panel</span>
           </Link>
         </div>
@@ -81,14 +81,14 @@ const DashboardHeader = () => {
             {isProfileOpen && (
               <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-popover border border-border ring-1 ring-black ring-opacity-5">
                 <Link
-                  to="/dashboard/profile"
+                  to="/panel/profile"
                   className="flex items-center px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
                 >
                   <User className="h-4 w-4 mr-2" />
                   {t('navbar_profile')}
                 </Link>
                 <Link
-                  to="/dashboard/settings"
+                  to="/panel/settings"
                   className="flex items-center px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
                 >
                   <Settings className="h-4 w-4 mr-2" />

@@ -36,34 +36,34 @@ const Sidebar = () => {
 
   const menuItems = [
     { 
-      path: '/dashboard', 
+      path: '/panel/dashboard', 
       icon: <LayoutDashboard size={ICON_SIZE} />, 
       label: t('dashboard'),
     },
     { 
-      path: '/dashboard/users', 
+      path: '/panel/users', 
       icon: <Users size={ICON_SIZE} />, 
       label: t('users'),
       subMenus: [
         { 
-          path: '/dashboard/users/list', 
+          path: '/panel/users/list', 
           icon: <List size={SUB_ICON_SIZE} />, 
           label: t('list_users')
         },
         { 
-          path: '/dashboard/users/create', 
+          path: '/panel/users/create', 
           icon: <PlusCircle size={SUB_ICON_SIZE} />, 
           label: t('create_user')
         },
       ]
     },
     { 
-      path: '/dashboard/addresses', 
+      path: '/panel/addresses', 
       icon: <MapPin size={ICON_SIZE} />, 
       label: t('addresses')
     },
     { 
-      path: '/dashboard/configs', 
+      path: '/panel/configs', 
       icon: <Settings size={ICON_SIZE} />, 
       label: t('configs')
     },

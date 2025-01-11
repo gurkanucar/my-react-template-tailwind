@@ -79,7 +79,7 @@ const Navbar = () => {
                 <Link to="/home" className={navLinkClasses('/home')}>
                   {t('navbar_home')}
                 </Link>
-                <Link to="/dashboard" className={navLinkClasses('/dashboard')}>
+                <Link to="/panel/dashboard" className={navLinkClasses('/dashboard')}>
                   {t('dashboard')}
                 </Link>
                 <Link to="/profile" className={navLinkClasses('/profile')}>

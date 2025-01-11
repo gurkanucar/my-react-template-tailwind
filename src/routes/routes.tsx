@@ -30,13 +30,15 @@ const emptyRoutes = [
 ].map((route) => ({ ...route, element: withFade(route.element) }));
 
 const dashboardRoutes = [
-  { path: '/dashboard', element: <Pages.Dashboard /> },
-  { path: '/dashboard/users', element: <Pages.Users /> },
-  { path: '/dashboard/users/list', element: <Pages.UsersList /> },
-  { path: '/dashboard/users/create', element: <Pages.CreateUser /> },
-  { path: '/dashboard/users/:id/edit', element: <Pages.EditUser /> },
-  { path: '/dashboard/addresses', element: <Pages.Addresses /> },
-  { path: '/dashboard/configs', element: <Pages.Configs /> },
+  { path: '/panel/dashboard', element: <Pages.Dashboard /> },
+  { path: '/panel/users', element: <Pages.Users /> },
+  { path: '/panel/users/list', element: <Pages.UsersList /> },
+  { path: '/panel/users/create', element: <Pages.CreateUser /> },
+  { path: '/panel/users/:id/edit', element: <Pages.EditUser /> },
+  { path: '/panel/addresses', element: <Pages.Addresses /> },
+  { path: '/panel/configs', element: <Pages.Configs /> },
+  { path: '/panel/profile', element: <Pages.Profile /> },
+  { path: '/panel/settings', element: <Pages.Settings /> },
 ].map((route) => ({ ...route, element: withFade(route.element) }));
 
 export const routes = [
