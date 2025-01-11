@@ -47,5 +47,8 @@
   "footer_text": "MIT Licensed. Open-source and free forever.",
   "github": "GitHub",
   "twitter": "Twitter",
-  "contact": "Contact"
+  "contact": "Contact",
+  "welcome_to_app": "Welcome to Our App",
+  "page_not_found": "Page not found",
+  "back_to_home": "Back to Home"
 }

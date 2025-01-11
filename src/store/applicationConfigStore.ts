@@ -11,6 +11,9 @@ interface IAppConfStore {
   toggleLanguage: (l: string) => void;
   toggleThemeMode: (m: ThemeMode) => void;
   initializeTheme: () => void;
+  isAuthenticated: boolean;
+  login: () => void;
+  logout: () => void;
 }
 
 export const useApplicationConfigStore = create<IAppConfStore>()(
@@ -56,6 +59,9 @@ export const useApplicationConfigStore = create<IAppConfStore>()(
         i18n.changeLanguage(defaultLanguage);
         set({ language: defaultLanguage });
       },
+      isAuthenticated: false,
+      login: () => set({ isAuthenticated: true }),
+      logout: () => set({ isAuthenticated: false }),
     }),
     {
       name: 'applicationConfig',
