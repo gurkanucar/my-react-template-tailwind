@@ -65,8 +65,8 @@ const Navbar = () => {
           <div className="flex items-center space-x-4">
             {/* Language and Theme selectors - Hidden on mobile */}
             <div className="hidden md:flex items-center space-x-2">
-              <LanguageSelector />
-              <ThemeSelector />
+              <LanguageSelector showText={false} />
+              <ThemeSelector showText={false} />
             </div>
 
             {/* Notifications */}

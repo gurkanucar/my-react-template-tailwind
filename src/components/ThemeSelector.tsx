@@ -28,7 +28,11 @@ const themeOptions: ThemeOption[] = [
   },
 ];
 
-const ThemeSelector = () => {
+interface ThemeSelectorProps {
+  showText?: boolean;
+}
+
+const ThemeSelector = ({ showText = true }: ThemeSelectorProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { themeMode, toggleThemeMode } = useApplicationConfigStore();
@@ -69,9 +73,11 @@ const ThemeSelector = () => {
         {currentTheme && (
           <>
             <currentTheme.icon className="h-4 w-4" />
-            <span className="capitalize">
-              {t(currentTheme.label)}
-            </span>
+            {showText && (
+              <span className="capitalize">
+                {t(currentTheme.label)}
+              </span>
+            )}
           </>
         )}
         <ChevronDown

@@ -23,7 +23,11 @@ const localizations: Localization[] = [
   },
 ];
 
-const LanguageSelector = () => {
+interface LanguageSelectorProps {
+  showText?: boolean;
+}
+
+const LanguageSelector = ({ showText = true }: LanguageSelectorProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { language, toggleLanguage } = useApplicationConfigStore();
@@ -66,9 +70,11 @@ const LanguageSelector = () => {
           alt={`${currentLocalization?.locale} flag`}
           className="h-3 w-5 object-cover"
         />
-        <span className="capitalize">
-          {t(currentLocalization?.locale || '')}
-        </span>
+        {showText && (
+          <span className="capitalize">
+            {t(currentLocalization?.locale || '')}
+          </span>
+        )}
         <ChevronDown
           className={`h-4 w-4 transition-transform duration-200 ${
             isOpen ? 'rotate-180' : ''
