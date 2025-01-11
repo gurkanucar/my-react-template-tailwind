@@ -20,7 +20,7 @@ export const useApplicationConfigStore = create<IAppConfStore>()(
       language: 'en',
 
       toggleLanguage: (value: string) => {
-        i18n.changeLanguage(value); // Update i18next language
+        i18n.changeLanguage(value);
         set({
           language: value,
         });
@@ -40,7 +40,6 @@ export const useApplicationConfigStore = create<IAppConfStore>()(
       initializeTheme: () => {
         const { themeMode, language } = get();
 
-        // Initialize theme
         if (themeMode === 'system') {
           const systemPrefersDark = window.matchMedia(
             '(prefers-color-scheme: dark)',
@@ -53,14 +52,13 @@ export const useApplicationConfigStore = create<IAppConfStore>()(
           );
         }
 
-        // Initialize language (default to 'en' if not set)
         const defaultLanguage = language || 'en';
         i18n.changeLanguage(defaultLanguage);
-        set({ language: defaultLanguage }); // Ensure it's stored in the state
+        set({ language: defaultLanguage });
       },
     }),
     {
-      name: 'applicationConfig', // Persist the state under this key
+      name: 'applicationConfig',
     },
   ),
 );
