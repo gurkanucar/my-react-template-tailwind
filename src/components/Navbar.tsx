@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Menu, X, User, LogOut, Settings, Bell } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { useApplicationConfigStore } from '@/store/applicationConfigStore';
@@ -14,6 +14,7 @@ const Navbar = () => {
   const profileDropdownRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
   const { logout } = useApplicationConfigStore();
 
   useEffect(() => {
@@ -37,6 +38,30 @@ const Navbar = () => {
     navigate('/login');
   };
 
+  const isActivePath = (path: string) => location.pathname === path;
+
+  const navLinkClasses = (path: string) =>
+    `relative px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ease-in-out inline-block
+    ${
+      isActivePath(path)
+        ? 'text-foreground'
+        : 'text-muted-foreground hover:text-foreground'
+    }
+    before:absolute before:bottom-1 before:left-3 before:right-3 before:h-[2px] before:bg-primary
+    before:transform before:origin-left before:scale-x-0 before:transition-transform before:duration-300
+    ${isActivePath(path) ? 'before:scale-x-100' : 'hover:before:scale-x-100'}`;
+
+  const mobileNavLinkClasses = (path: string) =>
+    `relative px-3 py-2 rounded-md text-base font-medium transition-all duration-200 inline-block
+    ${
+      isActivePath(path)
+        ? 'text-foreground'
+        : 'text-muted-foreground hover:text-foreground'
+    }
+    before:absolute before:bottom-1 before:left-3 before:right-3 before:h-[2px] before:bg-primary
+    before:transform before:origin-left before:scale-x-0 before:transition-transform before:duration-300
+    ${isActivePath(path) ? 'before:scale-x-100' : 'hover:before:scale-x-100'}`;
+
   return (
     <nav className="bg-background border-b border-border shadow-[0_2px_10px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_10px_-2px_rgba(0,0,0,0.2)] sticky top-0 z-50">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,23 +75,14 @@ const Navbar = () => {
 
             {/* Desktop Navigation */}
             <div className="hidden md:block ml-6">
-              <div className="flex items-center space-x-4">
-                <Link
-                  to="/home"
-                  className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                >
+              <div className="flex items-center">
+                <Link to="/home" className={navLinkClasses('/home')}>
                   {t('navbar_home')}
                 </Link>
-                <Link
-                  to="/dashboard"
-                  className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                >
+                <Link to="/dashboard" className={navLinkClasses('/dashboard')}>
                   {t('dashboard')}
                 </Link>
-                <Link
-                  to="/profile"
-                  className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                >
+                <Link to="/profile" className={navLinkClasses('/profile')}>
                   {t('navbar_profile')}
                 </Link>
               </div>
@@ -154,22 +170,13 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="md:hidden border-t border-border bg-background">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link
-              to="/home"
-              className="block px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-            >
+            <Link to="/home" className={mobileNavLinkClasses('/home')}>
               {t('navbar_home')}
             </Link>
-            <Link
-              to="/dashboard"
-              className="block px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-            >
+            <Link to="/dashboard" className={mobileNavLinkClasses('/dashboard')}>
               {t('dashboard')}
             </Link>
-            <Link
-              to="/profile"
-              className="block px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-            >
+            <Link to="/profile" className={mobileNavLinkClasses('/profile')}>
               {t('navbar_profile')}
             </Link>
           </div>
