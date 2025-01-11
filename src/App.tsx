@@ -1,4 +1,5 @@
 import { RouterProvider } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import { Suspense } from 'react';
 
 import { router } from './routes';
@@ -9,7 +10,9 @@ const App = () => {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <RouterProvider router={router} />
+      <AnimatePresence mode="wait">
+        <RouterProvider router={router} />
+      </AnimatePresence>
     </Suspense>
   );
 };
