@@ -1,15 +1,17 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useApplicationConfigStore } from '@/store/applicationConfigStore';
 
 const Login = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { login } = useApplicationConfigStore();
 
   const handleLogin = () => {
     login();
-    navigate('/home');
+    const redirectTo = searchParams.get('redirect') || '/home';
+    navigate(redirectTo);
   };
 
   return (
