@@ -38,34 +38,34 @@ const Sidebar = () => {
     { 
       path: '/panel/dashboard', 
       icon: <LayoutDashboard size={ICON_SIZE} />, 
-      label: t('dashboard'),
+      label: t('sidebar.dashboard'),
     },
     { 
       path: '/panel/users', 
       icon: <Users size={ICON_SIZE} />, 
-      label: t('users'),
+      label: t('sidebar.users.title'),
       subMenus: [
         { 
           path: '/panel/users/list', 
           icon: <List size={SUB_ICON_SIZE} />, 
-          label: t('list_users')
+          label: t('sidebar.users.list')
         },
         { 
           path: '/panel/users/create', 
           icon: <PlusCircle size={SUB_ICON_SIZE} />, 
-          label: t('create_user')
+          label: t('sidebar.users.create')
         },
       ]
     },
     { 
       path: '/panel/addresses', 
       icon: <MapPin size={ICON_SIZE} />, 
-      label: t('addresses')
+      label: t('sidebar.addresses')
     },
     { 
       path: '/panel/configs', 
       icon: <Settings size={ICON_SIZE} />, 
-      label: t('configs')
+      label: t('sidebar.configs')
     },
   ];
 

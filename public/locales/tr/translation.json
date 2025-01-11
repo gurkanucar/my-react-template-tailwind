@@ -47,5 +47,16 @@
   "footer_text": "MIT Lisanslı. Açık kaynak ve sonsuza kadar ücretsiz.",
   "github": "GitHub",
   "twitter": "Twitter",
-  "contact": "İletişim"
+  "contact": "İletişim",
+  "sidebar": {
+    "dashboard": "Kontrol Paneli",
+    "users": {
+      "title": "Kullanıcılar",
+      "list": "Kullanıcı Listesi",
+      "create": "Kullanıcı Oluştur"
+    },
+    "addresses": "Adresler",
+    "configs": "Yapılandırmalar",
+    "settings": "Ayarlar"
+  }
 }

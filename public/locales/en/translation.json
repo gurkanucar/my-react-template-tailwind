@@ -56,5 +56,16 @@
   "configs": "Configurations",
   "list_users": "List Users",
   "create_user": "Create User",
-  "edit_user": "Edit User"
+  "edit_user": "Edit User",
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "users": {
+      "title": "Users",
+      "list": "List Users",
+      "create": "Create User"
+    },
+    "addresses": "Addresses",
+    "configs": "Configurations",
+    "settings": "Settings"
+  }
 }
