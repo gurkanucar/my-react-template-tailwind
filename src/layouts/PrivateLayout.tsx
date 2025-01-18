@@ -1,18 +1,21 @@
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
+import { useKeycloak } from '@react-keycloak/web';
 
 import Navbar from '@/components/Navbar';
-import { useApplicationConfigStore } from '@/store/applicationConfigStore';
 
 const PrivateLayout = () => {
-  const { isAuthenticated } = useApplicationConfigStore();
+  const { keycloak, initialized } = useKeycloak();
   const location = useLocation();
 
-  if (!isAuthenticated) {
-    return <Navigate to={`/login?redirect=${location.pathname}`} replace />;
+  if (!initialized) {
+    return <div>Loading...</div>;
   }
 
-  if (location.pathname.startsWith('/panel') && !isAuthenticated) {
-    return <Navigate to="/login" replace />;
+  if (!keycloak.authenticated) {
+    keycloak.login({
+      redirectUri: window.location.origin + location.pathname,
+    });
+    return null;
   }
 
   return (
@@ -25,4 +28,4 @@ const PrivateLayout = () => {
   );
 };
 
-export default PrivateLayout; 
+export default PrivateLayout;

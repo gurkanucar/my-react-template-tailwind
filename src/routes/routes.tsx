@@ -38,7 +38,6 @@ const dashboardRoutes = [
   { path: '/panel/addresses', element: <Pages.Addresses /> },
   { path: '/panel/configs', element: <Pages.Configs /> },
   { path: '/panel/profile', element: <Pages.Profile /> },
-  { path: '/panel/settings', element: <Pages.Settings /> },
 ].map((route) => ({ ...route, element: withFade(route.element) }));
 
 export const routes = [
@@ -46,9 +45,13 @@ export const routes = [
     element: <PublicLayout />,
     children: publicRoutes,
   },
+  // {
+  //   element: <PrivateLayout />,
+  //   children: privateRoutes.filter(route => route.path !== '/dashboard'),
+  // },
   {
     element: <PrivateLayout />,
-    children: privateRoutes.filter(route => route.path !== '/dashboard'),
+    children: privateRoutes,
   },
   {
     element: <DashboardLayout />,
